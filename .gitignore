@@ -1,8 +1,7 @@
 #Ignore-List
-/MyProgram/MyProgram/
-*.sln
+/obj
+/bin
 *.txt
 *.md
 *.config
-*.csproj
 /.gitattributes
