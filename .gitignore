@@ -5,3 +5,5 @@
 *.md
 *.config
 /.gitattributes
+MyProgram/MyProgram/bin/
+MyProgram/MyProgram/obj/Debug/
