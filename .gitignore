@@ -3,6 +3,5 @@
 *.md
 *.config
 *.csproj
-/Properties/
-/bin/
-/obj/
+/FirstProgram/FirtsProgram/
+
