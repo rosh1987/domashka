@@ -1,36 +1,42 @@
 ﻿using System;
 
 
-namespace DiscountСalculator 
+namespace DiscountСalculator
 {
-    class Discountc : Product
+    class DiscauntProduct : IDiscount
     {
-        public new int DiscountValue { get; set; }
-        public new DateTime? StartSellDate { get; set; }
-        public new DateTime? EndSellDate { get; set; }
-        public new int Price { get; set; }
+        public int PriceProduct { get; set; }
+        public string NameProduct { get; set; }
+        public DateTime? StartDateDiscount { get; set; }
+        public DateTime? EndDateDiscount { get; set; }
+        public int DiscountValueCard { get; set; }
 
-
-        public new int CalculateDiscountPrice()
+        public DiscauntProduct(string name, int price, int discountValue, DateTime? startSellDate, DateTime? endSellDate)
         {
-            return DiscountValue != 0 &&
-                    StartSellDate.HasValue &&
-                    EndSellDate.HasValue &&
-                    StartSellDate <= DateTime.UtcNow &&
-                    EndSellDate >= DateTime.UtcNow
-                ? Price - DiscountValue
-                : Price;
+            NameProduct = name;
+            PriceProduct = price;
+            StartDateDiscount = startSellDate;
+            EndDateDiscount = endSellDate;
+            DiscountValueCard = discountValue;
         }
 
-        public new string GetSellInformation()
+        public int CalculateDiscountPrice()
         {
-            return DiscountValue != 0 && StartSellDate.HasValue && EndSellDate.HasValue
-                    ? $"На данный товар действует подарочная карта на сумму {DiscountValue} р. в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +
+            return DiscountValueCard != 0 &&
+                    StartDateDiscount.HasValue &&
+                    EndDateDiscount.HasValue &&
+                    StartDateDiscount <= DateTime.UtcNow &&
+                    EndDateDiscount >= DateTime.UtcNow
+                ? PriceProduct - DiscountValueCard
+                : PriceProduct;
+        }
+
+        public string GetSellInformation()
+        {
+            return DiscountValueCard != 0 && StartDateDiscount.HasValue && EndDateDiscount.HasValue
+                    ? $"На данный товар действует подарочная карта на сумму {DiscountValueCard} р. в период с {StartDateDiscount.Value.ToShortDateString()} по {EndDateDiscount.Value.ToShortDateString()}. " +
                         $"Сумма с учётом подарочной карты - {CalculateDiscountPrice()}р."
                     : $"На данный товар не действует подарочных карт ";
         }
-
-
-
     }
 }

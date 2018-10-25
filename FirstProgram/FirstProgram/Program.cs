@@ -4,6 +4,8 @@ namespace DiscountСalculator
 {
     class Program
     {
+        public static object Price { get; private set; }
+
         static void Main(string[] args)
         {
             Console.WriteLine("Вы хотите добавить новый продукт? 1 - да, 2 - нет");
@@ -21,7 +23,6 @@ namespace DiscountСalculator
         private static void CreateProduct()
         {
             var product = new Product();
-            var discount = new Discountc();
 
             Console.WriteLine("Введите название продукта");
 
@@ -40,11 +41,11 @@ namespace DiscountСalculator
 
             product.Price = price;
 
-            Console.WriteLine("Вы хотите воспользоватся следующими видами скидок: 1 - процентной скидкой, 2 - подарочной картой?");
+            Console.WriteLine("Вы хотите воспользоваться скидкой? 1 - скидкой, 2 - подарочной картой");
 
-            int.TryParse(Console.ReadLine(), out var answer);
+            int.TryParse(Console.ReadLine(), out var answerSell);
 
-            if (answer == 1)
+            if (answerSell == 1)
             {
                 Console.WriteLine("Введите значение скидки на товар (в % от общей стоимости)");
 
@@ -65,39 +66,39 @@ namespace DiscountСalculator
 
                 int.TryParse(Console.ReadLine(), out var discountValue);
 
-                while (discountValue > product.Price)
+                while (discountValue > price)
                 {
-                    Console.WriteLine("Сумма подарочной карты не может быть большее цены на товар!");
+                    Console.WriteLine("Сумма подарочной карты не может быть больше цены товара!");
+
                     int.TryParse(Console.ReadLine(), out discountValue);
                 }
 
-                discount.Price = price;
-                discount.DiscountValue = discountValue;
+                product.DiscountValue = discountValue;
             }
+                Console.WriteLine("Введите дату начала действия скидки/подарочной карты");
 
-            Console.WriteLine("Введите дату начала действия скидки");
+                DateTime.TryParse(Console.ReadLine(), out var startSellDate);
 
-            DateTime.TryParse(Console.ReadLine(), out var startSellDate);
+                if (startSellDate != DateTime.MinValue)
+                {
+                    product.StartSellDate = startSellDate;
+                }
 
-            if (startSellDate != DateTime.MinValue)
-            {
-                product.StartSellDate = startSellDate;
-                discount.StartSellDate = startSellDate;
-            }
+                Console.WriteLine("Введите дату окончания действия скидки/подарочной карты");
 
-            Console.WriteLine("Введите дату окончания действия скидки");
+                DateTime.TryParse(Console.ReadLine(), out var endSellDate);
 
-            DateTime.TryParse(Console.ReadLine(), out var endSellDate);
+                if (endSellDate != DateTime.MinValue)
+                {
+                    product.EndSellDate = endSellDate;
+                }
 
-            if (endSellDate != DateTime.MinValue)
-            {
-                product.EndSellDate = endSellDate;
-                discount.EndSellDate = endSellDate;
-            }
-
-            if (answer == 1) Console.WriteLine("Вы успешно добавили новый продукт:" + product.Name + ", стоимость " + product.Price + "р." + product.GetSellInformation());
-            else Console.WriteLine("Вы успешно добавили новый продукт:" + product.Name + ", стоимость " + product.Price + "р." + discount.GetSellInformation());
-
+                if (answerSell == 1) Console.WriteLine("Вы успешно добавили новый продукт:" + product.Name + ", стоимость " + product.Price + "р." + product.GetSellInformation());
+                else
+                {
+                    var discount = new DiscauntProduct(product.Name, product.Price, product.DiscountValue, product.StartSellDate, product.EndSellDate);
+                    Console.WriteLine("Вы успешно добавили новый продукт:" + discount.NameProduct + ", стоимость " + discount.PriceProduct + "р." + discount.GetSellInformation());
+                }
         }
     }
 }
