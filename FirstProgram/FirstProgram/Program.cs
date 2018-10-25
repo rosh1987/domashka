@@ -82,13 +82,13 @@ namespace DiscountСalculator
             else
             {
                 var discount = new Discountc();
-                discount.Price = price;
+                discount.ProductPrice = price;
 
                 Console.WriteLine("Введите сумму подарочной карты");
 
                 int.TryParse(Console.ReadLine(), out var discountCardValue);
 
-                while (discountCardValue > discount.Price)
+                while (discountCardValue > price)
                 {
                     Console.WriteLine("Значение суммы карты не может быть больше цены на товар");
 
@@ -99,20 +99,20 @@ namespace DiscountСalculator
                 
                 Console.WriteLine("Введите дату начала действия подарочной карты");
 
-                DateTime.TryParse(Console.ReadLine(), out var startSellDate);
+                DateTime.TryParse(Console.ReadLine(), out var startDiscountDate);
 
-                if (startSellDate != DateTime.MinValue)
+                if (startDiscountDate != DateTime.MinValue)
                 {
-                    discount.StartSellDate = startSellDate;
+                    discount.StartDiscountDate = startDiscountDate;
                 }
 
                 Console.WriteLine("Введите дату окончания действия подарочной карты");
 
-                DateTime.TryParse(Console.ReadLine(), out var endSellDate);
+                DateTime.TryParse(Console.ReadLine(), out var endDiscountDate);
 
-                if (endSellDate != DateTime.MinValue)
+                if (endDiscountDate != DateTime.MinValue)
                 {
-                    discount.EndSellDate = endSellDate;
+                    discount.EndDiscountDate = endDiscountDate;
                 }
 
                 Console.WriteLine($"Вы успешно добавили новый продукт: {product.Name}, стоимость - {product.Price}р. {discount.GetSellInformation()}");
