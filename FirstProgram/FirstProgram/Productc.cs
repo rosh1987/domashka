@@ -24,9 +24,9 @@ namespace DiscountСalculator
         public string GetSellInformation()
         {
             return DiscountValue != 0 && StartSellDate.HasValue && EndSellDate.HasValue
-                    ? $"На данный товар действует подарочная карта на сумму {DiscountValue} %. в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +
-                        $"Сумма с учётом подарочной карты - {CalculateDiscountPrice()}р."
-                    : $"На данный товар не действует скидок и подарочных карт";
+                    ? $"На данный товар действует скидка {DiscountValue} %. в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +
+                        $"Сумма с учётом скидки - {CalculateDiscountPrice()}р."
+                    : $"На данный товар не действует скидок";
         }
 
     }

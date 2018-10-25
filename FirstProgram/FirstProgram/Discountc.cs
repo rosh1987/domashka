@@ -3,31 +3,31 @@
 
 namespace DiscountСalculator 
 {
-    class Discountc : IDiscount
+    class Discountc : Product
     {
-        public int DiscountCardValue { get; set; }
-        public DateTime? StartDiscountDate { get; set; }
-        public DateTime? EndDiscountDate { get; set; }
-        public int ProductPrice { get; set; }
+        public new int DiscountValue { get; set; }
+        public new DateTime? StartSellDate { get; set; }
+        public new DateTime? EndSellDate { get; set; }
+        public new int Price { get; set; }
 
 
-        public int CalculateDiscountPrice()
+        public new int CalculateDiscountPrice()
         {
-            return DiscountCardValue != 0 &&
-                    StartDiscountDate.HasValue &&
-                    EndDiscountDate.HasValue &&
-                    StartDiscountDate <= DateTime.UtcNow &&
-                    EndDiscountDate >= DateTime.UtcNow
-                ? ProductPrice - DiscountCardValue
-                : ProductPrice;
+            return DiscountValue != 0 &&
+                    StartSellDate.HasValue &&
+                    EndSellDate.HasValue &&
+                    StartSellDate <= DateTime.UtcNow &&
+                    EndSellDate >= DateTime.UtcNow
+                ? Price - DiscountValue
+                : Price;
         }
 
-        public string GetSellInformation()
+        public new string GetSellInformation()
         {
-            return DiscountCardValue != 0 && StartDiscountDate.HasValue && EndDiscountDate.HasValue
-                    ? $"На данный товар действует подарочная карта на сумму {DiscountCardValue} р. в период с {StartDiscountDate.Value.ToShortDateString()} по {EndDiscountDate.Value.ToShortDateString()}. " +
+            return DiscountValue != 0 && StartSellDate.HasValue && EndSellDate.HasValue
+                    ? $"На данный товар действует подарочная карта на сумму {DiscountValue} р. в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +
                         $"Сумма с учётом подарочной карты - {CalculateDiscountPrice()}р."
-                    : $"На данный товар не действует скидок и подарочных карт";
+                    : $"На данный товар не действует подарочных карт ";
         }
 
 
