@@ -58,25 +58,8 @@ namespace DiscountСalculator
                 }
 
                 product.DiscountValue = discountValue;
-            }
-            else
-            {
-                Console.WriteLine("Введите сумму подароной карты");
 
-                int.TryParse(Console.ReadLine(), out var discountCardValue);
-
-                while (discountCardValue > price)
-                {
-                    Console.WriteLine("Сумма подарочной карты не должна быть больше стоимости продукта");
-
-                    int.TryParse(Console.ReadLine(), out discountCardValue);
-                }
-
-                product.DiscountCardValue = discountCardValue;
-
-            }
-
-                Console.WriteLine("Введите дату начала действия скидки/подарочной карты");
+                Console.WriteLine("Введите дату начала действия скидки");
 
                 DateTime.TryParse(Console.ReadLine(), out var startSellDate);
 
@@ -85,7 +68,7 @@ namespace DiscountСalculator
                     product.StartSellDate = startSellDate;
                 }
 
-                Console.WriteLine("Введите дату окончания действия скидки/подарочной карты");
+                Console.WriteLine("Введите дату окончания действия скидки");
 
                 DateTime.TryParse(Console.ReadLine(), out var endSellDate);
 
@@ -95,6 +78,45 @@ namespace DiscountСalculator
                 }
 
                 Console.WriteLine($"Вы успешно добавили новый продукт: {product.Name}, стоимость - {product.Price}р. {product.GetSellInformation()}");
+            }
+            else
+            {
+                var discount = new Discountc();
+                discount.Price = price;
+
+                Console.WriteLine("Введите сумму подарочной карты");
+
+                int.TryParse(Console.ReadLine(), out var discountCardValue);
+
+                while (discountCardValue > discount.Price)
+                {
+                    Console.WriteLine("Значение суммы карты не может быть больше цены на товар");
+
+                    int.TryParse(Console.ReadLine(), out discountCardValue);
+                }
+
+               discount.DiscountCardValue = discountCardValue;
+                
+                Console.WriteLine("Введите дату начала действия подарочной карты");
+
+                DateTime.TryParse(Console.ReadLine(), out var startSellDate);
+
+                if (startSellDate != DateTime.MinValue)
+                {
+                    discount.StartSellDate = startSellDate;
+                }
+
+                Console.WriteLine("Введите дату окончания действия подарочной карты");
+
+                DateTime.TryParse(Console.ReadLine(), out var endSellDate);
+
+                if (endSellDate != DateTime.MinValue)
+                {
+                    discount.EndSellDate = endSellDate;
+                }
+
+                Console.WriteLine($"Вы успешно добавили новый продукт: {product.Name}, стоимость - {product.Price}р. {discount.GetSellInformation()}");
+            }
         }
     }
 }
