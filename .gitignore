@@ -7,5 +7,5 @@
 /.gitattributes
 MyProgram
 
-FirstProgram/FirstProgram/bin
-FirstProgram/FirstProgram/obj
+FirstProgram/bin
+FirstProgram/obj
