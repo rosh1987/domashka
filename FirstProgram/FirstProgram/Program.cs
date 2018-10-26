@@ -4,8 +4,6 @@ namespace DiscountСalculator
 {
     class Program
     {
-        public static object Price { get; private set; }
-
         static void Main(string[] args)
         {
             Console.WriteLine("Вы хотите добавить новый продукт? 1 - да, 2 - нет");
@@ -41,12 +39,13 @@ namespace DiscountСalculator
 
             product.Price = price;
 
-            Console.WriteLine("Вы хотите воспользоваться скидкой? 1 - скидкой, 2 - подарочной картой");
+            Console.WriteLine("Вы хотите воспользоватся следующими видами скидок: 1 - процентной скидкой, 2 - подарочной картой?");
 
-            int.TryParse(Console.ReadLine(), out var answerSell);
+            int.TryParse(Console.ReadLine(), out var answer);
 
-            if (answerSell == 1)
+            if (answer == 1)
             {
+
                 Console.WriteLine("Введите значение скидки на товар (в % от общей стоимости)");
 
                 int.TryParse(Console.ReadLine(), out var discountValue);
@@ -59,23 +58,8 @@ namespace DiscountСalculator
                 }
 
                 product.DiscountValue = discountValue;
-            }
-            else
-            {
-                Console.WriteLine("Введите сумму подарочной карты");
 
-                int.TryParse(Console.ReadLine(), out var discountValue);
-
-                while (discountValue > price)
-                {
-                    Console.WriteLine("Сумма подарочной карты не может быть больше цены товара!");
-
-                    int.TryParse(Console.ReadLine(), out discountValue);
-                }
-
-                product.DiscountValue = discountValue;
-            }
-                Console.WriteLine("Введите дату начала действия скидки/подарочной карты");
+                Console.WriteLine("Введите дату начала действия скидки");
 
                 DateTime.TryParse(Console.ReadLine(), out var startSellDate);
 
@@ -84,7 +68,7 @@ namespace DiscountСalculator
                     product.StartSellDate = startSellDate;
                 }
 
-                Console.WriteLine("Введите дату окончания действия скидки/подарочной карты");
+                Console.WriteLine("Введите дату окончания действия скидки");
 
                 DateTime.TryParse(Console.ReadLine(), out var endSellDate);
 
@@ -93,12 +77,13 @@ namespace DiscountСalculator
                     product.EndSellDate = endSellDate;
                 }
 
-                if (answerSell == 1) Console.WriteLine("Вы успешно добавили новый продукт:" + product.Name + ", стоимость " + product.Price + "р." + product.GetSellInformation());
-                else
-                {
-                    var discount = new DiscauntProduct(product.Name, product.Price, product.DiscountValue, product.StartSellDate, product.EndSellDate);
-                    Console.WriteLine("Вы успешно добавили новый продукт:" + discount.NameProduct + ", стоимость " + discount.PriceProduct + "р." + discount.GetSellInformation());
-                }
+                Console.WriteLine($"Вы успешно добавили новый продукт: {product.Name}, стоимость - {product.Price}р. {product.GetSellInformation()}");
+            }
+            else if (answer == 2)
+            {
+                var discount = new ProductDiscount(product.Name, product.Price);
+                discount.CreateProductDiscount();
+            }
         }
     }
 }
