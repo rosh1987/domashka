@@ -1,22 +1,21 @@
 ﻿using System;
 
-
 namespace DiscountСalculator 
 {
     class ProductDiscount : Product, IDiscount
     {
-        public new string Name { get; set; }
-        public new int DiscountValue { get; set; }
-        public new int Price { get; set; }
-        public new DateTime? StartSellDate { get; set; }
-        public new DateTime? EndSellDate { get; set; }
+        private new string Name { get; set; }
+        private new int DiscountValue { get; set; }
+        private new int Price { get; set; }
+        private new DateTime? StartSellDate { get; set; }
+        private new DateTime? EndSellDate { get; set; }
 
         public ProductDiscount(string name, int price)
         {
             Name = name;
             Price = price;
         }
-        public new int CalculateDiscountPrice()
+        private new int CalculateDiscountPrice()
         {
             return DiscountValue != 0 &&
                     StartSellDate.HasValue &&
@@ -27,7 +26,7 @@ namespace DiscountСalculator
                 : Price;
         }
 
-        public new string GetSellInformation()
+        private new string GetSellInformation()
         {
             return DiscountValue != 0 && StartSellDate.HasValue && EndSellDate.HasValue
                     ? $"На данный товар действует подарочная карта на сумму {DiscountValue} р. в период с {StartSellDate.Value.ToShortDateString()} по {EndSellDate.Value.ToShortDateString()}. " +

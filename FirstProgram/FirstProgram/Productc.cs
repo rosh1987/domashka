@@ -28,6 +28,5 @@ namespace DiscountСalculator
                         $"Сумма с учётом подарочной карты - {CalculateDiscountPrice()}р."
                     : $"На данный товар не действует скидок";
         }
-
     }
 }

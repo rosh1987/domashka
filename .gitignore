@@ -10,3 +10,12 @@ MyProgram
 FirstProgram/FirstProgram/bin
 FirstProgram/FirstProgram/obj/Debug
 FirstProgram/.vs
+
+LinqLesson/LinqLesson/bin
+LinqLesson/LinqLesson/obj
+LinqLesson/LinqLesson/.vs
+
+LinqLesson/.vs/LinqLesson/v15/Server/sqlite3/storage.ide-wal
+LinqLesson/.vs/LinqLesson/v15/Server/sqlite3/storage.ide-shm
+LinqLesson/.vs/LinqLesson/v15/Server/sqlite3/storage.ide
+LinqLesson/.vs/LinqLesson/v15/Server/sqlite3/db.lock
