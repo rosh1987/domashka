@@ -24,15 +24,13 @@ namespace LinqLesson
             var result = peoples.OrderByDescending(x => x.Age).FirstOrDefault();
            
             Console.WriteLine(result.Name + " " + result.Age + " " + result.Sex + " " + result.Balance);
-
-            Console.WriteLine();
+           
             Console.WriteLine("Самый богатый");
 
             result = peoples.OrderByDescending(x => x.Balance).FirstOrDefault();
 
             Console.WriteLine(result.Name + " " + result.Age + " " + result.Sex + " " + result.Balance);
-
-            Console.WriteLine();
+           
             Console.WriteLine("Сколько людей имеют баланс выше 4000");
 
             var resultBalance = peoples.Where(x => x.Balance > 4000);
@@ -43,7 +41,7 @@ namespace LinqLesson
             {
                 Console.WriteLine(people.Name + " " + people.Age + " " + people.Sex + " " + people.Balance);
             }
-            Console.WriteLine();
+           
             Console.WriteLine("Сортировка по возасту");
 
             var sortAge = peoples.OrderByDescending(x => x.Age);
@@ -53,7 +51,7 @@ namespace LinqLesson
                 Console.WriteLine(people.Name + " " + people.Age + " " + people.Sex + " " + people.Balance);
             }
 
-            Console.WriteLine();
+            
             Console.WriteLine("Сортировка по балансу");
 
             var sortBalance = peoples.OrderByDescending(x => x.Balance);
@@ -63,7 +61,7 @@ namespace LinqLesson
                 Console.WriteLine(people.Name + " " + people.Age + " " + people.Sex + " " + people.Balance);
             }
 
-            Console.WriteLine();
+           
             Console.WriteLine("Сортировка по полу");
 
             var sortSex = peoples.OrderBy(x => x.Sex);
@@ -71,9 +69,6 @@ namespace LinqLesson
             {
                 Console.WriteLine(people.Name + " " + people.Age + " " + people.Sex + " " + people.Balance);
             }
-
-
-
         }
     }
 }
